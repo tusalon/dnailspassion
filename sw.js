@@ -1,22 +1,22 @@
-// sw.js - Service Worker para Olympo Salón
+// sw.js - Service Worker para DNailsPassion
 
-const CACHE_NAME = 'olymposalon-v1';
+const CACHE_NAME = 'dnailspassion-v1';
 const urlsToCache = [
-  '/olymposalon/',
-  '/olymposalon/index.html',
-  '/olymposalon/admin.html',
-  '/olymposalon/admin-login.html',
-  '/olymposalon/setup-wizard.html',
-  '/olymposalon/editar-negocio.html',
-  '/olymposalon/manifest.json',
-  '/olymposalon/icons/icon-72x72.png',
-  '/olymposalon/icons/icon-96x96.png',
-  '/olymposalon/icons/icon-128x128.png',
-  '/olymposalon/icons/icon-144x144.png',
-  '/olymposalon/icons/icon-152x152.png',
-  '/olymposalon/icons/icon-192x192.png',
-  '/olymposalon/icons/icon-384x384.png',
-  '/olymposalon/icons/icon-512x512.png'
+  '/dnailspassion/',
+  '/dnailspassion/index.html',
+  '/dnailspassion/admin.html',
+  '/dnailspassion/admin-login.html',
+  '/dnailspassion/setup-wizard.html',
+  '/dnailspassion/editar-negocio.html',
+  '/dnailspassion/manifest.json',
+  '/dnailspassion/icons/icon-72x72.png',
+  '/dnailspassion/icons/icon-96x96.png',
+  '/dnailspassion/icons/icon-128x128.png',
+  '/dnailspassion/icons/icon-144x144.png',
+  '/dnailspassion/icons/icon-152x152.png',
+  '/dnailspassion/icons/icon-192x192.png',
+  '/dnailspassion/icons/icon-384x384.png',
+  '/dnailspassion/icons/icon-512x512.png'
 ];
 
 // ============================================
@@ -108,7 +108,7 @@ self.addEventListener('fetch', event => {
           }
           // Si no hay cache y es imagen, devolver icon por defecto
           if (event.request.url.match(/\.(jpg|jpeg|png|gif|svg|webp)$/)) {
-            return caches.match('/olymposalon/icons/icon-192x192.png');
+            return caches.match('/dnailspassion/icons/icon-192x192.png');
           }
           return new Response('Error de red', { status: 408 });
         });
@@ -138,6 +138,6 @@ self.addEventListener('message', event => {
   }
 });
 
-console.log('✅ Service Worker configurado para Olympo Salón');
+console.log('✅ Service Worker configurado para DNailsPassion');
 console.log('📦 Cache:', CACHE_NAME);
 console.log('📄 Archivos a cachear:', urlsToCache.length);
