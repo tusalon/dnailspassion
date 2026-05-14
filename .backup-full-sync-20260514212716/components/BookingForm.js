@@ -259,8 +259,7 @@ END:VCALENDAR`;
                 let cursor = time;
                 const creadas = [];
 
-                for (let index = 0; index < profesional.asignaciones.length; index++) {
-                    const item = profesional.asignaciones[index];
+                for (const item of profesional.asignaciones) {
                     const servicioItem = item.servicio;
                     const profesionalItem = item.profesional;
                     const bookings = await getBookingsByDateAndProfesional(date, profesionalItem.id);
@@ -278,7 +277,7 @@ END:VCALENDAR`;
                         const bookingEnd = timeToMinutes(booking.hora_fin);
                         return (inicioMin < bookingEnd) && (finMin > bookingStart);
                     });
-                    const horarioPermitido = index > 0 || !servicioItem.horarios_permitidos?.length || servicioItem.horarios_permitidos.includes(cursor);
+                    const horarioPermitido = !servicioItem.horarios_permitidos?.length || servicioItem.horarios_permitidos.includes(cursor);
 
                     if (!dentroHorario || tocaDescanso || tieneConflicto || !horarioPermitido) {
                         setError(`El horario de ${servicioItem.nombre} con ${profesionalItem.nombre} ya no está disponible.`);

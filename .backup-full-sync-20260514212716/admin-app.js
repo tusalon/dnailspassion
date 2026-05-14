@@ -1230,7 +1230,7 @@ function AdminApp() {
                 }
 
                 alert(result.parcial
-                    ? 'Se crearon algunos servicios, pero uno falló. Revisa la agenda.'
+                    ? 'Se crearon algunos servicios, pero uno fallo. Revisa la agenda.'
                     : `Reserva creada exitosamente como "${result.data.estado}"`);
                 
                 try {
