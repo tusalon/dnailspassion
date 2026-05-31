@@ -1,6 +1,6 @@
 // sw.js - Service Worker para DNailsPassion
 
-const CACHE_NAME = 'dnailspassion-v29';
+const CACHE_NAME = 'dnailspassion-v47';
 const urlsToCache = [
   '/dnailspassion/',
   '/dnailspassion/index.html',
@@ -17,7 +17,14 @@ const urlsToCache = [
   '/dnailspassion/icons/icon-152x152.png',
   '/dnailspassion/icons/icon-192x192.png',
   '/dnailspassion/icons/icon-384x384.png',
-  '/dnailspassion/icons/icon-512x512.png'
+  '/dnailspassion/icons/icon-512x512.png',
+  '/dnailspassion/vendor/react.production.min.js',
+  '/dnailspassion/vendor/react-dom.production.min.js',
+  '/dnailspassion/vendor/babel.min.js',
+  '/dnailspassion/vendor/bcrypt.min.js',
+  '/dnailspassion/vendor/tailwind-browser.js',
+  '/dnailspassion/vendor/lucide/lucide.css',
+  '/dnailspassion/vendor/lucide/lucide.woff2'
 ];
 
 // ============================================
