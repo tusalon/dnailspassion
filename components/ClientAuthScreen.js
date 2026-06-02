@@ -253,9 +253,18 @@ function ClientAuthScreen({ onAccessGranted, onGoBack }) {
     return (
         <div
             className="rr-auth-screen min-h-screen flex items-center justify-center p-4 relative overflow-hidden"
-            style={{ minHeight: '100dvh', width: '100%', position: 'relative', overflow: 'hidden' }}
+            style={{
+                minHeight: '100dvh',
+                width: '100%',
+                position: 'relative',
+                overflow: 'hidden',
+                backgroundImage: `linear-gradient(rgba(0,0,0,.52), rgba(0,0,0,.52)), url("${fondoPortada.image}")`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                backgroundRepeat: 'no-repeat'
+            }}
         >
-            <div className="rr-auth-bg absolute inset-0 z-0" style={{ position: 'fixed', inset: 0, overflow: 'hidden' }}>
+            <div className="hidden" style={{ display: 'none' }}>
                 <img
                     src={fondoPortada.image}
                     alt="Fondo de salón"

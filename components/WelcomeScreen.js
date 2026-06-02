@@ -124,10 +124,20 @@ function WelcomeScreen({ onStart, onGoBack, cliente, userRol }) {
     return (
         <div 
             className="rr-auth-screen rr-auth-scroll relative min-h-screen w-full overflow-y-auto"
-            style={{ minHeight: '100dvh', width: '100%', position: 'relative', overflowX: 'hidden', overflowY: 'auto' }}
+            style={{
+                minHeight: '100dvh',
+                width: '100%',
+                position: 'relative',
+                overflowX: 'hidden',
+                overflowY: 'auto',
+                backgroundImage: `linear-gradient(rgba(0,0,0,.50), rgba(0,0,0,.50)), url("${fondoPortada.image}")`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                backgroundRepeat: 'no-repeat'
+            }}
         >
             {/* Imagen de fondo fija */}
-            <div className="rr-auth-bg fixed inset-0 z-0" style={{ position: 'fixed', inset: 0, overflow: 'hidden' }}>
+            <div className="hidden" style={{ display: 'none' }}>
                 <img 
                     src={fondoPortada.image}
                     alt="Fondo de salón" 

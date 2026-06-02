@@ -1,6 +1,6 @@
 // sw.js - Service Worker para DNailsPassion
 
-const CACHE_NAME = 'dnailspassion-v48';
+const CACHE_NAME = 'dnailspassion-v49';
 const urlsToCache = [
   '/dnailspassion/',
   '/dnailspassion/index.html',
