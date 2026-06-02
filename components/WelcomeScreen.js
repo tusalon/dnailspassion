@@ -123,23 +123,23 @@ function WelcomeScreen({ onStart, onGoBack, cliente, userRol }) {
 
     return (
         <div 
-            className="relative min-h-screen w-full overflow-y-auto"
+            className="rr-auth-screen rr-auth-scroll relative min-h-screen w-full overflow-y-auto"
         >
             {/* Imagen de fondo fija */}
-            <div className="fixed inset-0 z-0">
+            <div className="rr-auth-bg fixed inset-0 z-0">
                 <img 
                     src={fondoPortada.image}
                     alt="Fondo de salón" 
                     className="w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 bg-black/40"></div>
+                <div className="rr-auth-overlay absolute inset-0 bg-black/40"></div>
             </div>
 
             {/* Botón volver - fijo en la parte superior */}
             {onGoBack && (
                 <button
                     onClick={onGoBack}
-                    className="fixed top-4 left-4 z-20 w-10 h-10 backdrop-blur-sm rounded-full flex items-center justify-center transition-colors border"
+                    className="rr-auth-back fixed top-4 left-4 z-20 w-10 h-10 backdrop-blur-sm rounded-full flex items-center justify-center transition-colors border"
                     style={{
                         backgroundColor: hexToRgba(colorPrimario, 0.86),
                         borderColor: hexToRgba(colorSecundario, 0.75)
@@ -151,9 +151,9 @@ function WelcomeScreen({ onStart, onGoBack, cliente, userRol }) {
             )}
 
             {/* Contenido scrolleable */}
-            <div className="relative z-10 min-h-screen flex items-start justify-center py-16 px-4">
+            <div className="rr-auth-content rr-auth-wide relative z-10 min-h-screen flex items-start justify-center py-16 px-4">
                 <div
-                    className="w-full max-w-2xl bg-black/15 backdrop-blur-[1px] p-6 sm:p-10 rounded-3xl shadow-2xl border my-auto"
+                    className="rr-auth-card w-full max-w-2xl bg-black/15 backdrop-blur-[1px] p-6 sm:p-10 rounded-3xl shadow-2xl border my-auto"
                     style={{
                         borderColor: hexToRgba(colorSecundario, 0.42),
                         boxShadow: `0 24px 70px ${hexToRgba(colorPrimario, 0.22)}`
@@ -165,12 +165,12 @@ function WelcomeScreen({ onStart, onGoBack, cliente, userRol }) {
                             <img 
                                 src={config.logo_url} 
                                 alt={config.nombre} 
-                                className="w-20 h-20 sm:w-24 sm:h-24 object-contain mx-auto rounded-2xl shadow-2xl ring-4"
+                                className="rr-auth-logo w-20 h-20 sm:w-24 sm:h-24 object-contain mx-auto rounded-2xl shadow-2xl ring-4"
                                 style={{ '--tw-ring-color': hexToRgba(colorSecundario, 0.45) }}
                             />
                         ) : (
                             <div 
-                                className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl mx-auto flex items-center justify-center shadow-2xl ring-4"
+                                className="rr-auth-logo w-20 h-20 sm:w-24 sm:h-24 rounded-2xl mx-auto flex items-center justify-center shadow-2xl ring-4"
                                 style={{
                                     background: `linear-gradient(135deg, ${colorPrimario}, ${colorSecundario})`,
                                     '--tw-ring-color': hexToRgba(colorSecundario, 0.45)
