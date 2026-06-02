@@ -30,6 +30,19 @@
                 navigator.serviceWorker.register(swPath)
                     .then(registration => {
                         console.log('✅ ✅ Service Worker registrado:', registration.scope);
+                        registration.update();
+                        if (registration.waiting) {
+                            registration.waiting.postMessage({ type: 'SKIP_WAITING' });
+                        }
+                        registration.addEventListener('updatefound', () => {
+                            const worker = registration.installing;
+                            if (!worker) return;
+                            worker.addEventListener('statechange', () => {
+                                if (worker.state === 'installed' && navigator.serviceWorker.controller) {
+                                    worker.postMessage({ type: 'SKIP_WAITING' });
+                                }
+                            });
+                        });
                     })
                     .catch(error => {
                         console.log('❌ ❌ Error registrando Service Worker:', error);
@@ -65,6 +78,20 @@
             --brand-soft: rgba(249, 168, 212, 0.20);
             --brand-surface: rgba(249, 168, 212, 0.12);
             --brand-surface-strong: rgba(249, 168, 212, 0.28);
+        }
+
+        html,
+        body,
+        #root {
+            width: 100%;
+            min-height: 100%;
+            margin: 0;
+            background: #111827;
+        }
+
+        body {
+            overflow-x: hidden;
+            -webkit-text-size-adjust: 100%;
         }
 
         .text-pink-300,
@@ -171,6 +198,7 @@
             position: relative;
             min-height: 100vh;
             min-height: 100svh;
+            min-height: 100dvh;
             width: 100%;
             overflow: hidden;
             display: flex;
@@ -191,6 +219,7 @@
             z-index: -2;
             overflow: hidden;
             background: #111827;
+            pointer-events: none;
         }
 
         .rr-auth-bg img {
@@ -215,6 +244,7 @@
             z-index: 2;
             width: min(100%, 460px);
             margin: auto;
+            max-width: calc(100vw - 32px);
         }
 
         .rr-auth-content.rr-auth-wide {
@@ -225,6 +255,7 @@
         .rr-auth-card {
             position: relative;
             width: 100%;
+            max-width: 100%;
             border-radius: 24px;
             padding: 28px;
             background: rgba(0, 0, 0, 0.22);
@@ -267,6 +298,9 @@
             body,
             #root {
                 min-height: -webkit-fill-available;
+            }
+            .rr-auth-bg {
+                position: absolute;
             }
         }
 

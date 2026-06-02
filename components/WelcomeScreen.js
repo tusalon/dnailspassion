@@ -124,13 +124,15 @@ function WelcomeScreen({ onStart, onGoBack, cliente, userRol }) {
     return (
         <div 
             className="rr-auth-screen rr-auth-scroll relative min-h-screen w-full overflow-y-auto"
+            style={{ minHeight: '100dvh', width: '100%', position: 'relative', overflowX: 'hidden', overflowY: 'auto' }}
         >
             {/* Imagen de fondo fija */}
-            <div className="rr-auth-bg fixed inset-0 z-0">
+            <div className="rr-auth-bg fixed inset-0 z-0" style={{ position: 'fixed', inset: 0, overflow: 'hidden' }}>
                 <img 
                     src={fondoPortada.image}
                     alt="Fondo de salón" 
                     className="w-full h-full object-cover"
+                    style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', display: 'block' }}
                 />
                 <div className="rr-auth-overlay absolute inset-0 bg-black/40"></div>
             </div>
@@ -151,7 +153,7 @@ function WelcomeScreen({ onStart, onGoBack, cliente, userRol }) {
             )}
 
             {/* Contenido scrolleable */}
-            <div className="rr-auth-content rr-auth-wide relative z-10 min-h-screen flex items-start justify-center py-16 px-4">
+            <div className="rr-auth-content rr-auth-wide relative z-10 min-h-screen flex items-start justify-center py-16 px-4" style={{ position: 'relative', zIndex: 2, width: 'min(100%, 680px)', maxWidth: 'calc(100vw - 32px)', margin: 'auto' }}>
                 <div
                     className="rr-auth-card w-full max-w-2xl bg-black/15 backdrop-blur-[1px] p-6 sm:p-10 rounded-3xl shadow-2xl border my-auto"
                     style={{

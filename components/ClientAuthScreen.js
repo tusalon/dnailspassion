@@ -251,12 +251,16 @@ function ClientAuthScreen({ onAccessGranted, onGoBack }) {
                     especialidad.includes('belleza') ? '🌸' : '💖';
 
     return (
-        <div className="rr-auth-screen min-h-screen flex items-center justify-center p-4 relative overflow-hidden">
-            <div className="rr-auth-bg absolute inset-0 z-0">
+        <div
+            className="rr-auth-screen min-h-screen flex items-center justify-center p-4 relative overflow-hidden"
+            style={{ minHeight: '100dvh', width: '100%', position: 'relative', overflow: 'hidden' }}
+        >
+            <div className="rr-auth-bg absolute inset-0 z-0" style={{ position: 'fixed', inset: 0, overflow: 'hidden' }}>
                 <img
                     src={fondoPortada.image}
                     alt="Fondo de salón"
                     className="w-full h-full object-cover"
+                    style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', display: 'block' }}
                 />
                 <div className="rr-auth-overlay absolute inset-0 bg-black/40"></div>
             </div>
@@ -271,7 +275,7 @@ function ClientAuthScreen({ onAccessGranted, onGoBack }) {
                 </button>
             )}
 
-            <div className="rr-auth-content relative z-10 max-w-md w-full mx-auto">
+            <div className="rr-auth-content relative z-10 max-w-md w-full mx-auto" style={{ position: 'relative', zIndex: 2, width: 'min(100%, 460px)', maxWidth: 'calc(100vw - 32px)', margin: 'auto' }}>
                 <div className="rr-auth-card bg-black/15 backdrop-blur-[1px] p-8 rounded-2xl shadow-2xl border border-pink-300/25">
                     <div className="text-center mb-6">
                         {logoUrl ? (
