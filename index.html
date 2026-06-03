@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cargando...</title>
     <meta name="description" content="Reservá tu turno online">
     
@@ -30,19 +30,6 @@
                 navigator.serviceWorker.register(swPath)
                     .then(registration => {
                         console.log('✅ ✅ Service Worker registrado:', registration.scope);
-                        registration.update();
-                        if (registration.waiting) {
-                            registration.waiting.postMessage({ type: 'SKIP_WAITING' });
-                        }
-                        registration.addEventListener('updatefound', () => {
-                            const worker = registration.installing;
-                            if (!worker) return;
-                            worker.addEventListener('statechange', () => {
-                                if (worker.state === 'installed' && navigator.serviceWorker.controller) {
-                                    worker.postMessage({ type: 'SKIP_WAITING' });
-                                }
-                            });
-                        });
                     })
                     .catch(error => {
                         console.log('❌ ❌ Error registrando Service Worker:', error);
@@ -75,6 +62,8 @@
             --brand-secondary: #f9a8d4;
             --brand-primary-rgb: 236 72 153;
             --brand-secondary-rgb: 249 168 212;
+            --brand-primary-original: #ec4899;
+            --brand-secondary-original: #f9a8d4;
             --brand-soft: rgba(249, 168, 212, 0.20);
             --brand-surface: rgba(249, 168, 212, 0.12);
             --brand-surface-strong: rgba(249, 168, 212, 0.28);
@@ -83,15 +72,8 @@
         html,
         body,
         #root {
-            width: 100%;
             min-height: 100%;
             margin: 0;
-            background: #111827;
-        }
-
-        body {
-            overflow-x: hidden;
-            -webkit-text-size-adjust: 100%;
         }
 
         .text-pink-300,
@@ -118,6 +100,7 @@
         .bg-pink-600,
         .bg-pink-700 {
             background-color: var(--brand-primary) !important;
+            color: #fff !important;
         }
 
         .border-pink-100,
@@ -170,6 +153,7 @@
         .hover\:bg-pink-600:hover,
         .hover\:bg-pink-700:hover {
             background-color: var(--brand-secondary) !important;
+            color: #111827 !important;
         }
 
         .hover\:text-pink-600:hover,
@@ -193,130 +177,6 @@
         .focus\:border-pink-400:focus {
             border-color: var(--brand-primary) !important;
         }
-
-        .rr-auth-screen {
-            position: relative;
-            min-height: 100vh;
-            min-height: 100svh;
-            min-height: 100dvh;
-            width: 100%;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: max(16px, env(safe-area-inset-top)) 16px max(16px, env(safe-area-inset-bottom));
-            isolation: isolate;
-        }
-
-        .rr-auth-screen.rr-auth-scroll {
-            overflow-y: auto;
-            align-items: stretch;
-        }
-
-        .rr-auth-bg {
-            position: fixed;
-            inset: 0;
-            z-index: -2;
-            overflow: hidden;
-            background: #111827;
-            pointer-events: none;
-        }
-
-        .rr-auth-bg img {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center;
-            display: block;
-        }
-
-        .rr-auth-overlay {
-            position: absolute;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.48);
-            z-index: -1;
-        }
-
-        .rr-auth-content {
-            position: relative;
-            z-index: 2;
-            width: min(100%, 460px);
-            margin: auto;
-            max-width: calc(100vw - 32px);
-        }
-
-        .rr-auth-content.rr-auth-wide {
-            width: min(100%, 680px);
-            padding: 56px 0;
-        }
-
-        .rr-auth-card {
-            position: relative;
-            width: 100%;
-            max-width: 100%;
-            border-radius: 24px;
-            padding: 28px;
-            background: rgba(0, 0, 0, 0.22);
-            border: 1px solid rgba(var(--brand-secondary-rgb), 0.42);
-            box-shadow: 0 24px 70px rgba(0, 0, 0, 0.28);
-            color: #fff;
-            backdrop-filter: blur(2px);
-            -webkit-backdrop-filter: blur(2px);
-        }
-
-        .rr-auth-card input,
-        .rr-auth-card select {
-            min-height: 48px;
-            font-size: 16px;
-        }
-
-        .rr-auth-card button {
-            min-height: 46px;
-            font-size: 16px;
-        }
-
-        .rr-auth-back {
-            position: fixed;
-            top: max(14px, env(safe-area-inset-top));
-            left: max(14px, env(safe-area-inset-left));
-            z-index: 20;
-        }
-
-        .rr-auth-logo {
-            width: 80px;
-            height: 80px;
-            display: block;
-        }
-
-        @supports (-webkit-touch-callout: none) {
-            .rr-auth-screen {
-                min-height: -webkit-fill-available;
-            }
-            html,
-            body,
-            #root {
-                min-height: -webkit-fill-available;
-            }
-            .rr-auth-bg {
-                position: absolute;
-            }
-        }
-
-        @media (max-width: 430px) {
-            .rr-auth-screen {
-                padding-left: 14px;
-                padding-right: 14px;
-            }
-            .rr-auth-card {
-                padding: 22px;
-                border-radius: 20px;
-            }
-            .rr-auth-content.rr-auth-wide {
-                padding: 44px 0;
-            }
-        }
     </style>
 </head>
 <body>
@@ -325,7 +185,7 @@
     <!-- Scripts (rutas relativas) -->
     <script src="utils/supabase-config.js"></script>
     <script src="utils/hero-backgrounds.js?v=20260522-fondos-lashes-peluqueria"></script>
-    <script src="utils/config-negocio.js?v=20260528-internacional"></script>
+    <script src="utils/config-negocio.js?v=20260602-contraste"></script>
     <script src="utils/phone-utils.js?v=20260528-cliente-pais"></script>
     <script src="utils/storage.js"></script>
     <script src="utils/api.js?v=20260529-lista-espera"></script>
@@ -336,6 +196,8 @@
     <script src="utils/servicios.js"></script>
     <script src="utils/profesionales.js"></script>
     <script src="utils/whatsapp-helper.js?v=20260528-internacional"></script>
+    <script src="utils/push-config.js?v=20260601-web-push"></script>
+    <script src="utils/push-notifications.js?v=20260602-oculto"></script>
      <script src="utils/dias-cerrados.js"></script>
 
     <!-- Componentes -->
@@ -348,11 +210,11 @@
     <script src="components/Calendar.js?v=20260530-lista-espera-dia-lleno-fix2" type="text/babel"></script>
     <script src="components/TimeSlots.js?v=20260530-lista-espera-dia-lleno-fix2" type="text/babel"></script>
     <script src="components/MultiTimeSlots.js?v=20260526-tema-global" type="text/babel"></script>
-    <script src="components/BookingForm.js?v=20260528-internacional" type="text/babel"></script>
+    <script src="components/BookingForm.js?v=20260602-contraste-boton" type="text/babel"></script>
     <script src="components/Confirmation.js?v=20260528-internacional" type="text/babel"></script>
-    <script src="components/WelcomeScreen.js?v=20260602-ios-bg-inline" type="text/babel"></script>
+    <script src="components/WelcomeScreen.js?v=20260528-internacional" type="text/babel"></script>
     <script src="components/WhatsAppButton.js?v=20260528-internacional" type="text/babel"></script>
-    <script src="components/ClientAuthScreen.js?v=20260602-ios-bg-inline" type="text/babel"></script>
+    <script src="components/ClientAuthScreen.js?v=20260528-cliente-pais" type="text/babel"></script>
     <script src="components/MyBookings.js?v=20260529-reprogramar" type="text/babel"></script>
     <script src="components/InstallButton.js" type="text/babel"></script>
     
