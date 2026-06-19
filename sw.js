@@ -1,6 +1,6 @@
 // sw.js - Service Worker para DNailsPassion
 
-const CACHE_NAME = 'dnailspassion-v56';
+const CACHE_NAME = 'dnailspassion-v57';
 const urlsToCache = [
   '/dnailspassion/',
   '/dnailspassion/index.html',
@@ -25,6 +25,7 @@ const urlsToCache = [
   '/dnailspassion/vendor/tailwind-browser.js',
   '/dnailspassion/vendor/lucide/lucide.css',
   '/dnailspassion/vendor/lucide/lucide.woff2',
+  '/dnailspassion/utils/legacy-ios-fallback.css?v=20260619-ios15',
   '/dnailspassion/utils/push-config.js',
   '/dnailspassion/utils/push-notifications.js'
 ];
